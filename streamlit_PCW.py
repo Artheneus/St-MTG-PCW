@@ -1,6 +1,6 @@
 import streamlit as st
 import requests
-from googlesearch import search
+# from googlesearch import search
 from streamlit_option_menu import option_menu
 from bs4 import BeautifulSoup
 
@@ -14,6 +14,11 @@ def searching():
     SCG = []
     CK = []
     st.header("Search your cards !")
+    
+    try:
+        from googlesearch import search
+    except ImportError:
+        print("No Module Named 'google' found")
     
     with st.container():
             query = st.text_input(" ", "Input your card name ", key="placeholder")
