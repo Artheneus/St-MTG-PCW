@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 # from googlesearch import search
-from streamlit_option_menu import option_menu
+# from streamlit_option_menu import option_menu
 from bs4 import BeautifulSoup
 
 #Home Page
