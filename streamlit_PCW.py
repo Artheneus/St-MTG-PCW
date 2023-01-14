@@ -26,14 +26,15 @@ def searching():
             query = st.text_input(" ", "Input your card name ", key="placeholder")
             st.button("Search")
 
-    # for a in search(query, tld='com', num=20, stop=20, pause=4):
-    #     if 'starcitygames.com' in a:
-    #         SCG.append(a)
-    #         st.write(SCG)
+    for a in search(query, tld='com', num=20, stop=20, pause=4):
+        if 'starcitygames.com' in a:
+            SCG.append(a)
+            st.write(SCG)
 
-    #     if 'cardkingdom.com' in a:
-    #         CK.append(a) 
-    #         st.write(CK)
+        if 'cardkingdom.com' in a:
+            CK.append(a) 
+            st.write(CK)
+
 
     # for i in SCG:
     #     if SCG is not None:
@@ -103,22 +104,6 @@ def main():
 
     local_css("style/style.css")
 
-    # button_login = st.sidebar.button("Login")
-    # if button_login == True:
-    #     login()
-
-    # with st.sidebar:
-    #     selected = option_menu(
-    #         "Main Menu", ["Home", 'Settings'], 
-    #         icons=['house', 'gear'], menu_icon="cast", default_index=1
-            
-    #         # menu_title=None,
-    #         # options=["Home", "Searching", "Card List", "About"],
-    #         # choice = st.sidebar.selectbox("Menu", menu)
-    #         # orientation="horizontal"
-    #     )
-    #     selected
-
     with st.sidebar:
         with st.container():
             if st.sidebar.button("Login") == True:
@@ -127,28 +112,28 @@ def main():
             if st.sidebar.button("Sign Up") == True:
                 Sign_Up()
             
-        # with st.container():
-        #     selected = option_menu(
-        #         menu_title=None,
-        #         options=["Home", "Searching", "Card List", "About"],
-        #         icons=["house", "search", "list", "exclamation-circle"],
-        #         # menu_icon="cast",
-        #         default_index=1
-        #     )
+        with st.container():
+            selected = option_menu(
+                menu_title=None,
+                options=["Home", "Searching", "Card List", "About"],
+                icons=["house", "search", "list", "exclamation-circle"],
+                # menu_icon="cast",
+                default_index=1
+            )
 
         
 
-    # if selected == "Home":
-    #     Home()
+        if selected == "Home":
+            Home()
+        
+        elif selected == "Searching":
+            searching()
 
-    # elif selected == "Searching":
-    #     searching()
+        elif selected == "Card List":
+            cardList()
 
-    # elif selected == "Card List":
-    #     cardList()
-
-    # elif selected == "About":
-    #     about()
+        elif selected == "About":
+            about()
 
     
 
