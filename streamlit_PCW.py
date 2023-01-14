@@ -24,53 +24,53 @@ def searching():
             query = st.text_input(" ", "Input your card name ", key="placeholder")
             st.button("Search")
 
-    # for a in search(query, tld='com', num=20, stop=20, pause=4):
-    #     if 'starcitygames.com' in a:
-    #         SCG.append(a)
-    #         st.write(SCG)
+    for a in search(query, tld='com', num=20, stop=20, pause=4):
+        if 'starcitygames.com' in a:
+            SCG.append(a)
+            st.write(SCG)
 
-    #     if 'cardkingdom.com' in a:
-    #         CK.append(a) 
-    #         st.write(CK)
+        if 'cardkingdom.com' in a:
+            CK.append(a) 
+            st.write(CK)
 
-    # for i in SCG:
-    #     if SCG is not None:
-    #         try:
-    #             col1, col2 = st.columns(2)
-    #             URL = i
-    #             headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36'}
-    #             r = requests.get(URL, headers=headers)
-    #             content = r.text
-    #             soup = BeautifulSoup(content, 'html.parser')
-    #             title = soup.find("title", class_="removeSKU").get_text()
-    #             price = soup.find("span", {"class": "price price--withoutTax"}).get_text()
+    for i in SCG:
+        if SCG is not None:
+            try:
+                col1, col2 = st.columns(2)
+                URL = i
+                headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36'}
+                r = requests.get(URL, headers=headers)
+                content = r.text
+                soup = BeautifulSoup(content, 'html.parser')
+                title = soup.find("title", class_="removeSKU").get_text()
+                price = soup.find("span", {"class": "price price--withoutTax"}).get_text()
 
-    #             with col1:
-    #                 st.write(title)
-    #             with col2:
-    #                 st.write(price)
+                with col1:
+                    st.write(title)
+                with col2:
+                    st.write(price)
             
-    #         except:
-    #             st.write("Opps!, error occurred. ")
+            except:
+                st.write("Opps!, error occurred. ")
 
-    # for j in CK:
-    #     if CK is not None:
-    #         try:
-    #             col1, col2 = st.columns(2)
-    #             URL = j
-    #             headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36'}
-    #             r = requests.get(URL, headers=headers)
-    #             content = r.text
-    #             soup = BeautifulSoup(content, 'html.parser')
-    #             title = soup.find("meta", property="og:title")
-    #             price = soup.find("span", {"class": "stylePrice"}).get_text()
-    #             with col1:
-    #                 st.write(title["content"])
-    #             with col2:
-    #                 st.write(price)
+    for j in CK:
+        if CK is not None:
+            try:
+                col1, col2 = st.columns(2)
+                URL = j
+                headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36'}
+                r = requests.get(URL, headers=headers)
+                content = r.text
+                soup = BeautifulSoup(content, 'html.parser')
+                title = soup.find("meta", property="og:title")
+                price = soup.find("span", {"class": "stylePrice"}).get_text()
+                with col1:
+                    st.write(title["content"])
+                with col2:
+                    st.write(price)
                 
-    #         except:
-    #             st.write("Opps!, error occurred. ")
+            except:
+                st.write("Opps!, error occurred. ")
 
 #Cardlist Page
 def cardList():
@@ -105,17 +105,17 @@ def main():
     # if button_login == True:
     #     login()
 
-    # with st.sidebar:
-    #     selected = option_menu(
-    #         "Main Menu", ["Home", 'Settings'], 
-    #         icons=['house', 'gear'], menu_icon="cast", default_index=1
+    with st.sidebar:
+        selected = option_menu(
+            "Main Menu", ["Home", 'Settings'], 
+            icons=['house', 'gear'], menu_icon="cast", default_index=1
             
-    #         # menu_title=None,
-    #         # options=["Home", "Searching", "Card List", "About"],
-    #         # choice = st.sidebar.selectbox("Menu", menu)
-    #         # orientation="horizontal"
-    #     )
-    #     selected
+            # menu_title=None,
+            # options=["Home", "Searching", "Card List", "About"],
+            # choice = st.sidebar.selectbox("Menu", menu)
+            # orientation="horizontal"
+        )
+        selected
 
     with st.sidebar:
         with st.container():
@@ -125,28 +125,28 @@ def main():
             if st.sidebar.button("Sign Up") == True:
                 Sign_Up()
             
-        # with st.container():
-        #     selected = option_menu(
-        #         menu_title=None,
-        #         options=["Home", "Searching", "Card List", "About"],
-        #         icons=["house", "search", "list", "exclamation-circle"],
-        #         # menu_icon="cast",
-        #         default_index=1
-        #     )
+        with st.container():
+            selected = option_menu(
+                menu_title=None,
+                options=["Home", "Searching", "Card List", "About"],
+                icons=["house", "search", "list", "exclamation-circle"],
+                # menu_icon="cast",
+                default_index=1
+            )
 
         
 
-    # if selected == "Home":
-    #     Home()
+    if selected == "Home":
+        Home()
 
-    # elif selected == "Searching":
-    #     searching()
+    elif selected == "Searching":
+        searching()
 
-    # elif selected == "Card List":
-    #     cardList()
+    elif selected == "Card List":
+        cardList()
 
-    # elif selected == "About":
-    #     about()
+    elif selected == "About":
+        about()
 
     
 
