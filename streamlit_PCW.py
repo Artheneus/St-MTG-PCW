@@ -1,11 +1,12 @@
-from ast import With
-from asyncore import write
 from click import option, style
 import streamlit as st
 import requests
-#from googlesearch import search
+from googlesearch import search
 from streamlit_option_menu import option_menu
 from bs4 import BeautifulSoup
+import hydralit_components as hc
+
+st.set_page_config(layout='wide',initial_sidebar_state='collapsed')
 
 #Home Page
 def Home():
@@ -18,11 +19,10 @@ def searching():
     CK = []
     st.header("Search your cards !")
 
-    try:
-        from googlesearch import search
-    except ImportError:
-        print("No Module Named 'google' found")
-        
+    # try:
+    #     from googlesearch import search
+    # except ImportError:
+    #     print("No Module Named 'google' found")
     with st.container():
             query = st.text_input(" ", "Input your card name ", key="placeholder")
             st.button("Search")
@@ -30,12 +30,11 @@ def searching():
     for a in search(query, tld='com', num=20, stop=20, pause=4):
         if 'starcitygames.com' in a:
             SCG.append(a)
-            st.write(SCG)
+            # st.write(SCG)
 
         if 'cardkingdom.com' in a:
             CK.append(a) 
-            st.write(CK)
-
+            # st.write(CK)
 
     # for i in SCG:
     #     if SCG is not None:
@@ -102,43 +101,105 @@ def local_css(file_name):
 
 # main execute apps
 def main():
-
+    
     local_css("style/style.css")
 
-    with st.sidebar:
-        with st.container():
-            if st.sidebar.button("Login") == True:
-                login()
-        with st.container():
-            if st.sidebar.button("Sign Up") == True:
-                Sign_Up()
+    # button_login = st.sidebar.button("Login")
+    # if button_login == True:
+    #     login()
+
+    # with st.sidebar:
+    #     selected = option_menu(
+    #         "Main Menu", ["Home", 'Settings'], 
+    #         icons=['house', 'gear'], menu_icon="cast", default_index=1
             
-        with st.container():
-            selected = option_menu(
-                menu_title=None,
-                options=["Home", "Searching", "Card List", "About"],
-                icons=["house", "search", "list", "exclamation-circle"],
-                # menu_icon="cast",
-                default_index=1
-            )
+    #         # menu_title=None,
+    #         # options=["Home", "Searching", "Card List", "About"],
+    #         # choice = st.sidebar.selectbox("Menu", menu)
+    #         # orientation="horizontal"
+    #     )
+    #     selected
 
-        
+    with st.container():
+        with st.sidebar:
+            with st.container():
+                if st.sidebar.button("Login") == True:
+                    login()
+            with st.container():
+                if st.sidebar.button("Sign Up") == True:
+                    Sign_Up()
 
-        if selected == "Home":
-            Home()
-        
-        elif selected == "Searching":
-            searching()
+    # with st.container():
+        # with st.sidebar:
 
-        elif selected == "Card List":
-            cardList()
+selected = option_menu(
+                    menu_title=None,
+                    options=["Home", "Searching", "Card List", "About", "Login"],
+                    icons=["house", "search", "list", "exclamation-circle", "key"],
+                    # menu_icon="cast",
+                    default_index=0,
+                    orientation="horizontal",
+                    styles={
+                        "container" : {"border-radius" : "20px"},
+                        "icon" : {"color" : "", "font-size" : "16px"},
+                        "nav-link" : {"color" : "", "font-size" : "16px"},
+                        "background" : {"color" : "transparent", "border-radius" : "20px"}
+                    }
+                )
 
-        elif selected == "About":
-            about()
 
-    
+if selected == "Home":
+    Home()
+
+elif selected == "Searching":
+    searching()
+
+elif selected == "Card List":
+    cardList()
+
+elif selected == "About":
+    about()
 
 
+# hide_footer = st.markdown ("""
+#     <style>
+#     #MainMenu {visibility: hidden;}
+#     footer {visibility: hidden;}
+#     header {visibility: hidden;}
+#     </style>
+# """, unsafe_allow_html=True)
+
+# menu_data = [
+#     {'id':'searching', 'label':"Searching"},
+#     {'id':'cardlist', 'label':"Card List"},
+#     {'id':'about', 'label':"About Me"},
+#     {'id':'signup', 'label':"Sign Up"}
+# ]
+
+# over_theme = {'txc_inactive': '#FFFFFF'}
+
+# menu_id = hc.nav_bar(
+#     menu_definition=menu_data,
+#     override_theme=over_theme,
+#     home_name="Home",
+#     login_name="Login",
+#     hide_streamlit_markers=True,
+#     sticky_nav=True,
+#     sticky_mode='pinned'
+# )
+
+# if menu_id == "Home":
+#     Home()
+# if menu_id == "searching":
+#     searching()
+# if menu_id == "cardlist":
+#     cardList()
+# if menu_id == "about":
+#     about()
+# if menu_id == "Login":
+#     login()
+# if menu_id == "signup":
+#     Sign_Up()
 
 if __name__ == '__main__':
      main()
