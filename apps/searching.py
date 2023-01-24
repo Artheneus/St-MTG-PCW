@@ -20,7 +20,7 @@ class searching:
 
 
         #searching using loop from google search
-        for a in search(inpt, tld='com', num=15, stop=15, pause=3):
+        for a in search(inpt, num=15, stop=15, pause=3):
             if 'starcitygames.com' in a:
                 SCG.append(a)
                 # st.write(SCG)
